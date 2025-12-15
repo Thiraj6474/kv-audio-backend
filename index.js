@@ -5,6 +5,9 @@ import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRouter.js";
 import jwt from "jsonwebtoken";
 import { decode } from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express()
 
@@ -29,7 +32,7 @@ app.use((req,res,next)=>{
 });
 
 
-const mongoUrl = "mongodb+srv://thirajs:123@cluster0.tbhakaz.mongodb.net/?appName=Cluster0"
+const mongoUrl = process.env.MONGO_URL;
 
 mongoose.connect(mongoUrl)
 let connection = mongoose.connection
