@@ -27,11 +27,24 @@ export function addReview(req,res){
     });
 }
 
-export function getReviews(req,res){
+export async function getReviews(req,res){
     
     const user = req.user;
 
-    if(user == null || user.type != "admin"){
+    try{
+        if(user.type == "admin"){
+        const reviews = await Review.find();
+            res.json(reviews);
+        }else{
+            const reviews = await Review.find({isApproved : true});
+            res.json(reviews);
+        }
+
+    }catch(error){
+        res.status(500).json({error : "Failed to get reviews"});
+    }
+
+    /*if(user == null || user.type != "admin"){
         Review.find({isApproved : true}).then((reviews)=>{
             res.json(reviews);
         })
@@ -42,7 +55,7 @@ export function getReviews(req,res){
             res.json(reviews);
 
         })
-    }
+    }*/
 }
 
 export function deleteReview(req,res){
