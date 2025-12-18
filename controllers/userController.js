@@ -42,7 +42,9 @@ export function loginUser(req,res){
                         lastName : user.lastName,
                         email : user.email,
                         type : user.type,
-                        profilePicture : user.profilePicture
+                        profilePicture : user.profilePicture,
+                        phoneNumber :user.phoneNumber,
+
 
                     },process.env.JWT_SECRET)
 
@@ -55,6 +57,28 @@ export function loginUser(req,res){
         }
     )
 }
+
+export function isItAdmin(req){
+     let isAdmin = false;
+    if(req.user != null){
+        if(req.user.type == "admin"){
+            isAdmin = true;
+        }
+    }
+    return isAdmin;
+}
+
+export function isItCustomer(req){
+    let isCustomer = false;
+    if(req.user != null){
+        if(req.user.type == "customer"){
+            isCustomer = true;
+        }
+    }
+    return isCustomer;
+}
+
+
 
 /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG55LmRvZUBleGFtcGxlLmNvbSIsInR5cGUiOiJjdXN0b21lciIsImlhdCI6MTc2NTY0Nzc2Mn0.w0c2smY9LnecgYIldSep0nYsAvTnkO1GFHWq97-Tye8            -   "email": "johny.doe@example.com",
   "password": "Password@123" - user */
