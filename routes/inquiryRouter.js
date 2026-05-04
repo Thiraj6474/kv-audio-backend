@@ -1,5 +1,5 @@
 import express from "express";
-import { addInquiry, deleteInquiry, getInquiry, updateInquiry } from "../controllers/inquirycontroller.js";
+import { addInquiry, deleteInquiry, getInquiry, updateInquiry } from "../controllers/inquiryController.js";
 
 const inquiryRouter = express.Router();
 
